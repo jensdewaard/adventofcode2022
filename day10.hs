@@ -4,11 +4,12 @@
 import qualified Data.Text as T
 import Control.Monad.State
 import Data.List
+import Shared
 
 main :: IO ()
 main = do
     contents <- readFile "inputs/10.txt"
-    let cs = concatMap readInstruction $ filter (/= "") $ map T.unpack (T.splitOn (T.pack "\n") (T.pack contents))
+    let cs = concatMap readInstruction $ toLines contents
     let ss = scanl runInstruction 1 cs
     print $ sum $ map (strengthAtCycle ss) [20, 60, 100, 140, 180, 220]
     putStr $ unlines $ map (zipWith draw [0..]) (chunks 40 ss)

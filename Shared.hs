@@ -9,3 +9,5 @@ indexedList :: [a] -> [(Int, a)]
 indexedList = indexedList' 1 where
     indexedList' n (a:as) = (n, a) : indexedList' (succ n) as
     indexedList' _ [] = []
+
+type Coord = (Int, Int)
